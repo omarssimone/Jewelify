@@ -1,0 +1,164 @@
+/* Fullscreen generating splash */
+.generating-page {
+  position: relative;
+  height: calc(100vh - 70px);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff; /* Pure white background for clean luxury look */
+  padding-bottom: 10vh;
+}
+
+.generating-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* Removed fixed padding/border/shadow to make it feel seamless and huge */
+  width: 100%;
+  max-width: 800px; /* Constraints only on very wide screens */
+  text-align: center;
+}
+
+/* --- DIAMOND STYLES --- */
+
+/* Container: Increased from 80px to 260px for massive impact */
+.diamond-container {
+  width: 260px;
+  height: 260px;
+  margin: 0 auto 6rem auto; /* More breathing room below diamond */
+  perspective: 1000px;
+}
+
+.diamond-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.diamond-path {
+  fill: none;
+  stroke: #8B6914; 
+  stroke-width: 2.5px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  opacity: 1; 
+}
+
+.diamond-rotator {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: spin-elegant 8s linear infinite; /* Slowed down slightly for grandeur (4s -> 8s) */
+}
+
+/* Keyframes for rotation */
+@keyframes spin-elegant {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(360deg); }
+}
+
+/* --- TYPOGRAPHY --- */
+
+.gp-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem; /* More than double the previous size */
+  font-weight: 400; /* Regular weight looks more premium at large sizes */
+  letter-spacing: 0.02em;
+  color: #222;
+  margin-bottom: 0.5rem;
+  /* Optional: Smooth fade animation for text changes */
+  animation: fade-text 0.5s ease-in-out; 
+}
+
+.gp-subtext {
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: #888;
+  letter-spacing: 0.05em;
+  text-transform: uppercase; /* Adds a bit of "tech" feel */
+}
+
+/* --- SPARKLES --- */
+
+.sparkle-path {
+  fill: #DAA520; 
+  stroke: none;
+  filter: drop-shadow(0 0 1px rgba(139, 105, 20, 0.5)); 
+  transform-origin: center;
+  animation: sparkle-flash 2s infinite ease-in-out;
+}
+
+@keyframes sparkle-flash {
+  0%, 100% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(2); opacity: 1; } /* Increased scale for visibility */
+}
+
+/* Optional text fade animation */
+@keyframes fade-text {
+  from { opacity: 0.4; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- RESPONSIVE --- */
+
+@media (max-width: 768px) {
+  .diamond-container {
+    width: 180px; /* Still big on mobile, but fitting */
+    height: 180px;
+    margin-bottom: 2rem;
+  }
+  
+  .gp-text {
+    font-size: 1.8rem;
+    padding: 0 1rem;
+  }
+  
+  .gp-subtext {
+    font-size: 0.9rem;
+  }
+}
+
+.elegant-progress-track {
+  width: 240px; 
+  height: 1px;
+  background-color: #E0E0E0;
+  margin: 1.5rem 0;
+  position: relative;
+  overflow: visible; 
+}
+
+.elegant-progress-fill {
+  height: 100%;
+  background-color: #8B6914;
+  position: relative;
+}
+
+/* La "Gemma" sulla punta della barra */
+.progress-gem {
+  position: absolute;
+  right: -3px; /* Centrata orizzontalmente rispetto alla fine della linea */
+  top: -3px;   /* Centrata verticalmente rispetto alla linea alta 1px */
+  width: 7px;
+  height: 7px;
+  background-color: #8B6914;
+  transform: rotate(45deg); /* Forma a rombo */
+  box-shadow: 0 0 6px rgba(218, 165, 32, 0.6); /* Alone luminoso */
+}
+
+/* Optional: Effetto luccichio sulla gemma mentre avanza */
+.progress-gem::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: white;
+  opacity: 0;
+  animation: gem-twinkle 1s infinite;
+}
+
+@keyframes gem-twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 0.8; transform: scale(1.2); }
+}

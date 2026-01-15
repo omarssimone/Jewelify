@@ -1,0 +1,920 @@
+/* ===========================
+   GLOBAL STYLES & RESET
+   =========================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #fff;
+  color: #333;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  --navbar-height: 91px;
+}
+
+/* Home page styles moved to Home.css (variables in Home.css) */
+
+/* ===========================
+   SETUP SURVEY STYLES
+   =========================== */
+.survey-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--navbar-height));
+  background: #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+@media (max-width: 480px) {
+  .survey-footer .btn-send {
+    min-width: 120px;
+  }
+}
+
+.survey-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  position: relative;
+  min-height: 70px;
+}
+
+.survey-header h1 {
+  font-size: 1.8rem;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  color: #333;
+}
+
+.back-btn {
+  position: absolute;
+  left: 1.5rem;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: #333;
+  cursor: pointer;
+  padding: 8px 12px;
+  transition: color 0.3s ease;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.back-btn:hover:not(:disabled) {
+  color: #666;
+}
+
+.back-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.survey-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 20px;
+  overflow-y: auto;
+}
+
+/* Center layout for Step 1 */
+.survey-main.center-step {
+  justify-content: center;
+}
+
+.survey-step {
+  width: calc(100% - 2rem);
+  max-width: 1200px;
+  padding: 0 1rem;
+}
+
+.survey-step h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #525252;
+  text-align: center;
+}
+
+.survey-subtitle {
+  font-size: 1.7rem;
+  font-weight: 350;
+  text-align: center;
+  color: #333;
+  margin-bottom: 2rem;
+  line-height: 1.4;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.option-card {
+  background: #f5f5f5;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  gap: 12px;
+  padding: 16px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  min-height: 250px;
+  min-width: 250px;
+  touch-action: manipulation;
+  font-family: inherit;
+  font-size: 1rem;
+  position: relative; /* ensure badges position relative to each option card */
+}
+
+.option-card:hover {
+  background: #f0f0f0;
+  border-color: #999;
+}
+
+.option-card:disabled {
+  opacity: 1;
+  cursor: not-allowed;
+  filter: none;
+  padding: 0.75rem;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.question-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-right: 8px;
+}
+
+.question-card {
+  background: #fff;
+  border: 1px solid #eee;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+}
+
+.question-title {
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.option-emoji {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.option-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  margin-bottom: 8px;
+}
+
+.option-description {
+  font-size: 0.9rem;
+  color: #666;
+  text-align: center;
+  margin-top: 0.25rem;
+}
+
+.option-label {
+  margin-top: 6px;
+  text-align: center;
+  font-weight: 450;
+  font-size: 1.3rem;
+  /* Smoothly transition text color so it changes together with the card background */
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Also transition description color to keep visual consistency */
+.option-description {
+  transition: color 0.3s ease;
+}
+
+.survey-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 0.8rem;
+  background: #fff;
+  border-top: 1px solid #e0e0e0;
+}
+.survey-footer p {
+  margin: 0;
+}
+
+/* Button inside footer */
+.survey-footer .btn-send {
+  display: inline-block;
+  min-width: 150px;
+  max-width: calc(100% - 48px);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.btn-send {
+  padding: 10px 16px;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  min-height: 40px;
+  min-width: 150px;
+  touch-action: manipulation;
+}
+
+.btn-send:hover:not(:disabled) {
+  background-color: #555555;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-send:disabled {
+  background-color: #cccccc4a;
+  color: #e6e6e6;
+  cursor: not-allowed;
+}
+
+.btn-send:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.iterator-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  min-height: 70px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-back {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: #333;
+  cursor: pointer;
+  padding: 8px 12px;
+  transition: color 0.3s ease;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.btn-back:hover {
+  color: #666;
+}
+
+.header-left h1 {
+  font-size: 1.5rem;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  color: #333;
+}
+
+.header-right {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.control-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-icon {
+  background: none;
+  border: 1px solid #ddd;
+  width: 44px;
+  height: 44px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  touch-action: manipulation;
+}
+
+.btn-icon:hover:not(:disabled) {
+  border-color: #333;
+  background: #f5f5f5;
+}
+
+.btn-icon:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.iterator-main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 0;
+  overflow: hidden;
+}
+
+/* Responsive for tablets */
+@media (max-width: 1024px) {
+  .iterator-header {
+    padding: 1rem;
+  }
+  .iterator-main {
+    grid-template-columns: 1fr 300px;
+  }
+  .controls-section {
+    padding: 0.8rem;
+    gap: 1rem;
+    max-height: 100vh;
+  }
+  .pricing-block {
+    padding: 1rem;
+  }
+  .estimated-days {
+    font-size: 1.2rem;
+  }
+  .live-price {
+    font-size: 1.5rem;
+  }
+  .options-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* iPad Pro landscape specific */
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
+  .controls-section {
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-width: 300px;
+  }
+
+  .control-block select {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .control-block {
+    position: relative;
+  }
+}
+
+@media (max-width: 768px) {
+  .iterator-main {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+  }
+
+  .canvas-section {
+    min-height: 50vh;
+  }
+
+  .controls-section {
+    max-height: 50vh;
+    border-left: none;
+    border-top: 1px solid #e0e0e0;
+  }
+
+  .design-feedback {
+    display: none;
+  }
+
+  /* Make touch targets larger on mobile */
+  .control-block select,
+  .control-block input[type="range"] {
+    min-height: 48px;
+    font-size: 1rem;
+  }
+
+  .slider::-webkit-slider-thumb {
+    width: 24px;
+    height: 24px;
+  }
+
+  .slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.canvas-section {
+  position: relative;
+  background: #f9f9f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.three-canvas-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.canvas-main {
+  width: 100%;
+  height: 100%;
+}
+
+.design-feedback {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  opacity: 0;
+  animation: fadeInOut 3s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.loading-spinner {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid #ddd;
+  border-top-color: #333;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  font-size: 1rem;
+  color: #333;
+  margin-top: 0.5rem;
+}
+
+.controls-section {
+  background: #fff;
+  border-left: 1px solid #e0e0e0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  max-width: 350px;
+}
+
+.control-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 100%;
+  overflow: visible;
+}
+
+.control-block label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #666;
+}
+
+.control-block select,
+.control-block input[type="range"] {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  cursor: pointer;
+  min-height: 44px;
+  touch-action: manipulation;
+}
+
+.control-block select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+  padding-right: 36px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.control-block select:disabled,
+.control-block input[type="range"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.control-block select:focus,
+.control-block input[type="range"]:focus {
+  outline: none;
+  border-color: #333;
+  box-shadow: 0 0 0 3px rgba(51, 51, 51, 0.1);
+}
+
+.slider {
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: #ddd;
+  outline: none;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #333;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #333;
+  cursor: pointer;
+  border: none;
+  touch-action: manipulation;
+}
+
+.slider-value {
+  font-size: 0.8rem;
+  color: #999;
+  text-align: right;
+}
+
+.pricing-block {
+  background: #f5f5f5;
+  padding: 1.2rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.pricing-block h3 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #666;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+}
+
+.pricing-block h3:first-child {
+  margin-top: 0;
+}
+
+.estimated-days {
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.live-price {
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.btn-more-details {
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 4px 0;
+  text-decoration: underline;
+}
+
+.btn-more-details:hover {
+  color: #333;
+}
+
+.btn-confirm-order {
+  width: 100%;
+  padding: 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  min-height: 48px;
+  touch-action: manipulation;
+}
+
+.btn-confirm-order:hover:not(:disabled) {
+  background-color: #555;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-confirm-order:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* ===========================
+   CONFIRMATION MODAL
+   =========================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 1rem;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 8px;
+  padding: 2rem;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #999;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  touch-action: manipulation;
+}
+
+.modal-close:hover {
+  background: #f5f5f5;
+  color: #333;
+}
+
+.modal-content h2 {
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.order-summary {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  font-size: 0.95rem;
+  color: #666;
+}
+
+.summary-item span {
+  font-weight: 500;
+}
+
+.summary-item strong {
+  color: #333;
+  font-weight: 600;
+}
+
+.summary-divider {
+  height: 1px;
+  background: #ddd;
+  margin: 1rem 0;
+}
+
+.summary-price {
+  font-size: 1.1rem;
+  padding-top: 1rem;
+}
+
+.modal-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.btn-cancel,
+.btn-purchase {
+  padding: 12px 1rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  min-height: 44px;
+  transition: all 0.3s ease;
+  touch-action: manipulation;
+}
+
+.btn-cancel {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.btn-cancel:hover {
+  background: #d0d0d0;
+}
+
+.btn-purchase {
+  background: #333;
+  color: #fff;
+}
+
+.btn-purchase:hover {
+  background: #555;
+}
+
+/* Tablet responsive rules consolidated above */
+
+/* Mobile and small-height targets (merged rules to avoid duplication) */
+@media (max-width: 768px), (max-height: 600px) {
+  .survey-step {
+    padding: 1rem;
+    max-width: 100%;
+  }
+  .survey-subtitle {
+    font-size: 1.1rem;
+  }
+  .options-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .option-card {
+    min-height: 140px;
+    padding: 1rem;
+  }
+  .iterator-main {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+  }
+  .controls-section {
+    max-height: 50vh;
+    border-left: none;
+    border-top: 1px solid #e0e0e0;
+  }
+  .modal-content {
+    max-width: 90%;
+    padding: 1.5rem;
+  }
+  .modal-actions {
+    grid-template-columns: 1fr;
+  }
+  .control-block select,
+  .control-block input[type="range"] {
+    min-height: 48px;
+    font-size: 1rem;
+  }
+  .slider::-webkit-slider-thumb {
+    width: 24px;
+    height: 24px;
+  }
+  .slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+  }
+  .options-grid {
+    gap: 0.8rem;
+  }
+}
+
+/* Selected state accessibility fix (merged into one place) */
+/* Put transitions on the card itself and apply the color there so the
+   background and text color animate together and stay in sync. */
+.option-card {
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease,
+    transform 0.3s ease, border-color 0.3s ease;
+}
+.option-card.selected,
+.question-card .option-card.selected {
+  background-color: #333;
+  border-color: #333;
+  color: #f0f0f0;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  transform: translateY(-3px);
+  opacity: 1;
+}

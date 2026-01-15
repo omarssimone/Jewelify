@@ -1,0 +1,33 @@
+.app-navbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:20px 28px;
+  min-height:88px;
+  --navbar-height: 88px;
+  border-bottom:1px solid rgba(0,0,0,0.06);
+  background: #fff;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+}
+.navbar-left, .navbar-right{
+  min-width:140px;
+  display:flex;
+  align-items:center;
+}
+.navbar-center{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  pointer-events:auto;
+}
+
+/* Make sure ClickableTitle is visually centered */
+.clickable-title{
+  margin:0;
+}
+
+@media (max-width: 600px) {
+  .app-navbar{ padding:14px 12px; min-height:72px; --navbar-height: 72px; }
+  .navbar-left, .navbar-right { min-width:64px; }
+  .clickable-title .brand-title, .clickable-title-text.brand-title { font-size:1.6rem; }
+}

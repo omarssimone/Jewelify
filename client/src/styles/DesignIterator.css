@@ -1,0 +1,258 @@
+/* Styles for DesignIterator */
+
+.design-iterator {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 91px);
+  background: #fff;
+  overflow: hidden;
+}
+
+.iterator-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  position: relative;
+  min-height: 70px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 1.5rem;
+  gap: 1rem;
+}
+
+.model-tag {
+  margin-left: 14px;
+  color: #888;
+  font-size: 14px;
+}
+
+.header-right {
+  position: absolute;
+  right: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.design-header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.model-tag {
+  margin-left: 14px;
+  color: #888;
+  font-size: 14px;
+}
+
+.dropdown-toast {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 14px 18px;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  z-index: 9999;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dropdown-toast .spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: dropdown-spin 0.85s linear infinite;
+}
+
+@keyframes dropdown-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Clickable Ring Parts Section */
+.ring-parts-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-top: 1px solid #e0e0e0;
+  background: #fafafa;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.ring-parts-section h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  text-align: center;
+}
+
+.clickable-part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: #fff;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.clickable-part:hover {
+  border-color: #999;
+  background: #f5f5f5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.clickable-part:active {
+  transform: translateY(0);
+}
+
+.part-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.part-name {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Part Customization Modal */
+.part-modal {
+  max-width: 500px;
+  width: 90%;
+}
+
+.part-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.part-modal-icon {
+  font-size: 2.5rem;
+}
+
+.part-modal-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.part-modal-description {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.part-modal-options {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.part-modal-options h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.part-option-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.part-option-item:last-child {
+  border-bottom: none;
+}
+
+.option-value {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+  text-transform: capitalize;
+}
+
+/* AI Prompt Section */
+.ai-prompt-section {
+  margin-bottom: 1.5rem;
+}
+
+.ai-prompt-section h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.ai-prompt-hint {
+  font-size: 0.85rem;
+  color: #888;
+  margin: 0 0 0.75rem 0;
+}
+
+.ai-prompt-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  resize: vertical;
+  transition: border-color 0.2s ease;
+}
+
+.ai-prompt-input:focus {
+  outline: none;
+  border-color: #999;
+}
+
+.ai-prompt-input::placeholder {
+  color: #aaa;
+}
+/* Footer styling for DesignIterator */
+.design-iterator .home-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  margin: 0;
+  z-index: 100;
+}
